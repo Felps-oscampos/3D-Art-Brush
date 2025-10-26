@@ -1,0 +1,7 @@
+echo "# 3D-Art-Brush" >> README.md 
+git init 
+git add README.md 
+git commit -m "primeiro commit" 
+git branch -M main 
+git remote add origin https://github.com/Felps-oscampos/3D-Art-Brush.git
+ git push -u origin main

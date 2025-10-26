@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Art Brush | Modelagem 3D de Esculturas e Arte Sacra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e0e0e0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e0e0e0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #ddd;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #888, #666);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(200, 200, 200, 0.4);
+        }
+
+        section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #e0e0e0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #2a2a4e, #1f1f3a);
+            border: 2px solid rgba(200, 200, 200, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(200, 200, 200, 0.3);
+        }
+
+        .gallery-item-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #3a3a5e, #2a2a4e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: rgba(200, 200, 200, 0.3);
+            overflow: hidden;
+        }
+
+        .gallery-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item-info {
+            padding: 20px;
+        }
+
+        .gallery-item-info h3 {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .gallery-item-info p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .services {
+            background: rgba(42, 42, 78, 0.5);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 50px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #2a2a4e, #1f1f3a);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(200, 200, 200, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 200, 200, 0.5);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            background: rgba(42, 42, 78, 0.5);
+            border: 2px solid rgba(200, 200, 200, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #999;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(26, 26, 46, 0.95);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 40px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">3DARTBRUSH</div>
+        <ul class="nav-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Modelagem 3D Premium de Esculturas</h1>
+            <p>Arte sacra e esculturas realistas em alta definição</p>
+            <button class="cta-button" onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'})">
+                Solicite um Orçamento
+            </button>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfólio</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800" alt="Sagrado Coração de Jesus">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Sagrado Coração de Jesus</h3>
+                    <p>Escultura 3D hiper-realista com detalhes minuciosos em dobras de tecido, anatomia e texturização avançada.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1584180722150-3650a9e37d88?w=800" alt="Cristo Crucificado">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Cristo Crucificado</h3>
+                    <p>Modelagem anatômica precisa com acabamento em madeira simulada. Ideal para impressão 3D e produção artesanal.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800" alt="Busto Cristo">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Busto de Cristo com Coroa de Espinhos</h3>
+                    <p>Alto nível de detalhe em expressão facial, cabelos e textura. Renderização fotorrealística de alta qualidade.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800" alt="Nossa Senhora">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Nossa Senhora com o Menino Jesus</h3>
+                    <p>Escultura sacra com trabalho detalhado em coroas, dobras de vestimentas e anatomia. Pronta para fundição ou impressão.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?w=800" alt="Sagrada Família">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Sagrada Família</h3>
+                    <p>Composição harmoniosa com múltiplas figuras. Modelagem de tecidos fluidos e expressões realistas.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=800" alt="Cristo Pantocrator">
+                </div>
+                <div class="gallery-item-info">
+                    <h3>Cristo Pantocrator</h3>
+                    <p>Busto majestoso com detalhes em coroa de espinhos e anatomia facial. Arquivos otimizados para produção CNC.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicos">
+        <h2>Serviços Oferecidos</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⛏️</div>
+                <h3>Modelagem 3D Escultórica</h3>
+                <p>Criação de esculturas digitais hiper-realistas com anatomia precisa e detalhamento artístico profissional.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Renderização Fotorrealística</h3>
+                <p>Imagens de altíssima qualidade com iluminação cinematográfica e materiais realistas para apresentações.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Arte Sacra Personalizada</h3>
+                <p>Desenvolvimento de peças religiosas customizadas com respeito à tradição iconográfica e simbologia.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🖨️</div>
+                <h3>Arquivos para Impressão 3D</h3>
+                <p>Modelos otimizados e preparados para impressão 3D em resina ou filamento, com suportes quando necessário.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Modelos para CNC</h3>
+                <p>Arquivos compatíveis com fresadoras CNC para produção em madeira, pedra, metal ou outros materiais.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>Animações 360°</h3>
+                <p>Vídeos rotativos em alta definição para showcases digitais, redes sociais e apresentações comerciais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contato">
+        <h2>Entre em Contato</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="email" placeholder="Seu E-mail" required>
+            <input type="tel" placeholder="Telefone/WhatsApp">
+            <textarea placeholder="Descreva seu projeto: tipo de escultura, estilo desejado, dimensões, material final, prazo..." required></textarea>
+            <button type="submit" class="cta-button">Enviar Mensagem</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 3D Art Brush. Todos os direitos reservados.</p>
+        <p>Especialista em modelagem 3D de esculturas e arte sacra</p>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Obrigado pelo contato! Retornaremos em breve com um orçamento personalizado.');
+            e.target.reset();
+        }
+
+        // Smooth scroll para navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animação ao scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gallery-item, .service-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
