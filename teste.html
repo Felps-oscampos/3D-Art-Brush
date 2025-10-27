@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Descrição curta do site (ajuda no SEO) -->
+  <meta name="description" content="Modelagem 3D premium de esculturas e arte sacra. Impressão 3D, CNC e renderização fotorrealista.">
+  <!-- Cor do navegador em dispositivos móveis -->
+  <meta name="theme-color" content="#020308">
+  <!-- Metas Open Graph para compartilhar bonito nas redes -->
+  <meta property="og:title" content="3D Art Brush - Modelagem 3D de Esculturas e Arte Sacra">
+  <meta property="og:description" content="Arte sacra e esculturas realistas em alta definição.">
+  <meta property="og:type" content="website">
+  <!-- Troque essa imagem por uma sua hospedada -->
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=3D+Art+Brush">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>3D Art Brush | Modelagem 3D de Esculturas e Arte Sacra</title>
+
+  <style>
+    /*
+      Versão com CSS comentado para apresentação:
+      - Variáveis simples para reaproveitar valores
+      - Rolagem suave e compensação do cabeçalho fixo
+      - Menu mobile e foco visível (acessibilidade)
+      - Animação suave ao aparecer (via CSS/JS simples)
+    */
+
+    :root {
+      /* Altura do cabeçalho fixo (usada ao rolar para âncoras) */
+      --nav-height: 72px;
+      /* Cor de destaque para foco/hover */
+      --focus-color: #ffd700;
+      /* Cores base do tema (bordô escuro conforme sua paleta atual) */
+      --bg1: #020205;
+      --bg2: #020308;
+      --nav-bg: rgba(46, 11, 18, 0.95);
+      --card-bg: #2b0106cc;
+    }
+
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Rolagem suave para links de âncora (#id) */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: #fff;
+      /* Garante que o alvo da âncora não fique escondido sob o header fixo */
+      scroll-padding-top: var(--nav-height);
+    }
+
+    /* Cabeçalho fixo (fica no topo sempre) */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+
+    /* Barra de navegação com efeito levemente translúcido */
+    nav {
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      position: relative; /* ajuda a posicionar o menu no mobile */
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      /* Gradiente aplicado no texto do logo */
+      background: linear-gradient(135deg, #e0e0e0, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: #fff; text-decoration: none; transition: color 0.3s; font-weight: 500; }
+    .nav-links a:hover { color: var(--focus-color); }
+
+    /* Mostra foco visível ao navegar por teclado (acessibilidade) */
+    .nav-links a:focus-visible, .cta-button:focus-visible, .nav-toggle:focus-visible, .social-link:focus-visible {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Link para pular direto ao conteúdo principal (aparece ao focar) */
+    .skip-link {
+      position: absolute; left: -9999px; top: auto;
+      background: #000; color: #fff; padding: 10px 14px; border-radius: 6px;
+    }
+    .skip-link:focus { left: 20px; top: 20px; z-index: 1001; }
+
+    /* Botão do menu (aparece no mobile) */
+    .nav-toggle { display: none; background: none; color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+
+    /* Seções com largura máxima e espaçamento */
+    section { padding: 100px 50px; max-width: 1400px; margin: 0 auto; scroll-margin-top: var(--nav-height); }
+
+    /* Seção principal (hero) centralizada com título e subtítulo animados */
+    .hero { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 0 20px; }
+    .hero h1 {
+      /* Tamanho fluido: cresce/diminui conforme a tela */
+      font-size: clamp(32px, 6vw, 64px);
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e0e0e0, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease;
+    }
+    .hero p { font-size: clamp(16px, 2.5vw, 24px); margin-bottom: 32px; color: #ddd; animation: fadeInUp 1s ease 0.2s both; }
+    .cta-button { display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #888, #666); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 700; animation: fadeInUp 1s ease 0.4s both; }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(200, 200, 200, 0.25); }
+
+    /* Títulos das seções com efeito de gradiente */
+    h2 { font-size: 48px; margin-bottom: 40px; text-align: center; background: linear-gradient(135deg, #e0e0e0, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Grade do portfólio */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+    .gallery-item { position: relative; overflow: hidden; border-radius: 15px; background: linear-gradient(135deg, var(--card-bg), var(--card-bg)); border: 2px solid rgba(200, 200, 200, 0.3); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+    .gallery-item:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(200, 200, 200, 0.25); }
+    .gallery-item-img { width: 100%; aspect-ratio: 4 / 3; height: auto; background: linear-gradient(135deg, var(--card-bg), var(--card-bg)); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .gallery-item-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item-info { padding: 20px; }
+    .gallery-item-info h3 { color: #e0e0e0; margin-bottom: 10px; font-size: 22px; }
+    .gallery-item-info p { color: #bbb; line-height: 1.6; }
+
+    /* Serviços: cartões em grade */
+    .services { background: rgba(0, 0, 0, 0.5); border-radius: 20px; padding: 60px; margin: 50px auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
+    .service-card { background: linear-gradient(135deg, var(--card-bg), #010103); padding: 30px; border-radius: 15px; border: 2px solid rgba(200, 200, 200, 0.2); transition: transform 0.3s; }
+    .service-card:hover { transform: translateY(-5px); border-color: rgba(200, 200, 200, 0.45); }
+    .service-card h3 { color: #e0e0e0; margin-bottom: 12px; font-size: 20px; text-align: center; }
+    .service-card p { color: #ccc; text-align: center; }
+
+    /* Contato com links sociais, no lugar de formulário */
+    .contact { text-align: center; }
+    .social-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+    .social-link { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); color: #fff; text-decoration: none; }
+    .social-link:hover { background: rgba(255,255,255,0.08); }
+
+    /* Rodapé simples */
+    footer { text-align: center; padding: 30px; background: rgba(26, 26, 46, 0.95); border-top: 1px solid rgba(255, 215, 0, 0.2); }
+
+    /* Animação usada em títulos e cards (aplicada via JS quando entram na tela) */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Usuários que preferem menos movimento (acessibilidade) */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto; }
+    }
+
+    /* Regras para telas menores (ex.: celular) */
+    @media (max-width: 768px) {
+      /* Mostra o botão e recolhe a lista de links */
+      .nav-toggle { display: inline-block; }
+      .nav-links { display: none; position: absolute; right: 20px; top: 100%; background: rgba(0,0,0,0.9); padding: 12px; border-radius: 8px; flex-direction: column; min-width: 180px; border: 1px solid rgba(255,255,255,0.2); }
+      /* Quando o JS adiciona .is-open, exibimos o menu */
+      .nav-links.is-open { display: flex; }
+
+      section { padding: 70px 20px; }
+      .hero h1 { font-size: 36px; }
+      .hero p { font-size: 18px; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Link de acessibilidade: pula direto para o conteúdo principal -->
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header>
+    <nav aria-label="Navegação principal">
+      <div class="logo">3DARTBRUSH</div>
+      <!-- Botão abre/fecha o menu no celular; aria-* ajuda leitores de tela -->
+      <button id="navToggle" class="nav-toggle" aria-controls="menu" aria-expanded="false">☰ Menu</button>
+      <!-- Lista de links do menu; no mobile fica escondida até clicar -->
+      <ul id="menu" class="nav-links">
+        <li><a href="#home">Início</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal do site -->
+  <main id="conteudo">
+    <!-- Hero: mensagem de impacto e botão para contato -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Modelagem 3D Premium de Esculturas</h1>
+        <p>Arte sacra e esculturas realistas em alta definição</p>
+        <!-- Link que desce até a seção de contato (rolagem suave via CSS) -->
+        <a class="cta-button" href="#contato">Solicite um Orçamento</a>
+      </div>
+    </section>
+
+    <!-- Portfólio: substitua as imagens pelos seus arquivos locais -->
+    <section id="portfolio">
+      <h2>Portfólio</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Sagrado Coração de Jesus.jpeg" alt="Sagrado Coração de Jesus" alt="Sagrado Coração de Jesus">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Sagrado Coração de Jesus</h3>
+            <p>Escultura 3D hiper-realista com detalhes minuciosos em dobras de tecido, anatomia e texturização avançada.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Cristo Crucificado.jpeg" alt="Cristo Crucificado">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Cristo Crucificado</h3>
+            <p>Modelagem anatômica precisa com acabamento em madeira simulada. Ideal para impressão 3D e produção artesanal.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Cristo Busto.jpeg" alt="Busto de Cristo com Coroa de Espinhos">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Busto de Cristo com Coroa de Espinhos</h3>
+            <p>Alto nível de detalhe em expressão facial, cabelos e textura. Renderização fotorrealística de alta qualidade.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Nossa Senhora e Jesus com Coroa.jpeg" alt="Nossa Senhora com o Menino Jesus">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Nossa Senhora com o Menino Jesus</h3>
+            <p>Escultura sacra com trabalho detalhado em coroas, dobras de vestimentas e anatomia. Pronta para fundição ou impressão.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Santa com Rosário.jpg" alt="Santa Terezinha">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Santa Terezinha</h3>
+            <p>Composição harmoniosa com múltiplas figuras. Modelagem de tecidos fluidos e expressões realistas.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-item-img">
+            <img loading="lazy" decoding="async" src="IMG/Cristo Pantocrator.jpeg" alt="Cristo Pantocrator">
+          </div>
+          <div class="gallery-item-info">
+            <h3>Cristo Pantocrator</h3>
+            <p>Busto majestoso com detalhes em coroa de espinhos e anatomia facial. Arquivos otimizados para produção CNC.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Serviços oferecidos em cartões simples -->
+    <section class="services" id="servicos">
+      <h2>Serviços Oferecidos</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Modelagem 3D Escultórica</h3>
+          <p>Criação de esculturas digitais hiper-realistas com anatomia precisa e detalhamento artístico.</p>
+        </div>
+        <div class="service-card">
+          <h3>Renderização Fotorrealística</h3>
+          <p>Imagens com iluminação cinematográfica e materiais realistas para apresentações.</p>
+        </div>
+        <div class="service-card">
+          <h3>Arte Sacra Personalizada</h3>
+          <p>Peças religiosas customizadas com respeito à tradição iconográfica.</p>
+        </div>
+        <div class="service-card">
+          <h3>Arquivos para Impressão 3D</h3>
+          <p>Modelos preparados para impressão em resina ou filamento.</p>
+        </div>
+        <div class="service-card">
+          <h3>Modelos para CNC</h3>
+          <p>Arquivos compatíveis com fresadoras CNC para produção em diversos materiais.</p>
+        </div>
+        <div class="service-card">
+          <h3>Animações 360°</h3>
+          <p>Vídeos rotativos para redes sociais e apresentações comerciais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato: links diretos (sem formulário), com comentários do que trocar -->
+    <section class="contact" id="contato">
+      <h2>Conheça meu trabalho</h2>
+      <p>Veja projetos e solicite orçamentos pelos canais abaixo.</p>
+      <div class="social-links">
+        <!-- Troque SEU_USUARIO pelo seu @ do Instagram (sem o @) -->
+        <a class="social-link" href="https://instagram.com/3dartbrush" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+        <!-- Troque 55DDNUMERO pelo seu número com DDI+DDD. Ex.: 5511999999999 -->
+        <a class="social-link" href="https://wa.me/5517991731038?text=Ol%C3%A1%2C%20vim%20pelo%20site%203D%20Art%20Brush%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 3D Art Brush. Todos os direitos reservados.</p>
+    <p>Especialista em modelagem 3D de esculturas e arte sacra</p>
+  </footer>
+
+  <!-- Script simples com comentários: menu mobile + animação ao rolar -->
+  <script>
+    // Botão do menu (☰) e a lista de links
+    const btn = document.getElementById('navToggle');
+    const menu = document.getElementById('menu');
+
+    // Abre/fecha o menu no celular e atualiza aria-expanded (acessibilidade)
+    if (btn && menu) {
+      btn.addEventListener('click', function () {
+        menu.classList.toggle('is-open');
+        const aberto = menu.classList.contains('is-open');
+        btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      });
+    }
+
+    // Anima suavemente os cards quando entram na tela
+    const prefereMenosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefereMenosMovimento && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Aplica a animação definida no CSS (@keyframes fadeInUp)
+            entry.target.style.animation = 'fadeInUp 0.8s ease';
+            observer.unobserve(entry.target); // anima só uma vez
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.gallery-item, .service-card').forEach(el => observer.observe(el));
+    }
+  </script>
+</body>
+</html>
